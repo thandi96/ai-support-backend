@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Support Assistant | VirtuSync Solutions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-top: 5px solid #1C4C39; /* Dark Green Accent */
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #3E206D; /* Dark Purple */
+    }
+
+    #chatBox {
+      min-height: 250px;
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .message {
+      padding: 10px 15px;
+      border-radius: 20px;
+      max-width: 75%;
+      word-wrap: break-word;
+      line-height: 1.4;
+    }
+
+    .user {
+      background: #3E206D; /* Dark Purple */
+      color: white;
+      align-self: flex-end;
+    }
+
+    .assistant {
+      background: #F0F4F2;
+      color: #1C4C39; /* Dark Green */
+      align-self: flex-start;
+    }
+
+    #loader {
+      display: none;
+      text-align: center;
+      font-style: italic;
+      color: #999;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background: #1C4C39; /* Dark Green */
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #15402F;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>AI Support Assistant</h2>
+    <div id="chatBox"></div>
+    <div id="loader">The assistant is typing...</div>
+    <div class="input-group">
+      <input type="text" id="userInput" placeholder="Type your question..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <footer>Powered by <strong>VirtuSync Solutions</strong></footer>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+    const loader = document.getElementById("loader");
+
+    function appendMessage(message, className) {
+      const msg = document.createElement("div");
+      msg.className = `message ${className}`;
+      msg.innerText = message;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
+      if (!message) return;
+
+      appendMessage(message, "user");
+      input.value = "";
+      loader.style.display = "block";
+
+      try {
+        const res = await fetch("https://ai-support-backend.onrender.com/ai-reply", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
+        });
+
+        const data = await res.json();
+        appendMessage(data.reply || "Sorry, I didn’t get that. Try again?", "assistant");
+      } catch (err) {
+        appendMessage("⚠️ Error: Could not connect to server.", "assistant");
+      } finally {
+        loader.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
+
+
