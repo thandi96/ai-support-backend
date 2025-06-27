@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>AI Support Assistant | VirtuSync Solutions</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -18,13 +19,13 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      border-top: 5px solid #1C4C39; /* Dark Green Accent */
+      border-top: 5px solid #1C4C39;
     }
 
     h2 {
       text-align: center;
       margin-bottom: 20px;
-      color: #3E206D; /* Dark Purple */
+      color: #3E206D;
     }
 
     #chatBox {
@@ -36,49 +37,50 @@
     }
 
     .message {
-      padding: 10px 15px;
+      padding: 12px 16px;
       border-radius: 20px;
       max-width: 75%;
       word-wrap: break-word;
       line-height: 1.4;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .user {
-      background: #3E206D; /* Dark Purple */
+      background: #3E206D;
       color: white;
       align-self: flex-end;
     }
 
     .assistant {
       background: #F0F4F2;
-      color: #1C4C39; /* Dark Green */
+      color: #1C4C39;
       align-self: flex-start;
     }
 
-    .reply-button {
-      display: inline-block;
-      background-color: #014421;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 8px;
+    .contact-card {
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 8px;
+    }
+
+    .contact-card a {
+      color: #3E206D;
       text-decoration: none;
       font-weight: bold;
-      margin-top: 10px;
-      transition: background 0.3s ease;
     }
 
-    .reply-button:hover {
-      background-color: #0e362e;
-    }
-
-    .reply-contact {
-      background-color: #F0F4F2;
-      border-left: 5px solid #3E206D;
-      padding: 10px 15px;
-      border-radius: 10px;
-      margin-top: 10px;
-      color: #1C4C39;
-      line-height: 1.5;
+    .contact-card span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 5px 0;
     }
 
     #loader {
@@ -104,11 +106,14 @@
     button {
       padding: 10px 20px;
       border: none;
-      background: #1C4C39; /* Dark Green */
+      background: #1C4C39;
       color: white;
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     button:hover {
@@ -130,7 +135,7 @@
     <div id="loader">The assistant is typing...</div>
     <div class="input-group">
       <input type="text" id="userInput" placeholder="Type your question..." />
-      <button onclick="sendMessage()">Send</button>
+      <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i> Send</button>
     </div>
   </div>
 
@@ -143,7 +148,7 @@
     function appendMessage(message, className) {
       const msg = document.createElement("div");
       msg.className = `message ${className}`;
-      msg.innerHTML = message; // ✅ Renders HTML including buttons and cards
+      msg.innerHTML = message;
       chatBox.appendChild(msg);
       chatBox.scrollTop = chatBox.scrollHeight;
     }
@@ -175,6 +180,7 @@
   </script>
 </body>
 </html>
+
 
 
 
