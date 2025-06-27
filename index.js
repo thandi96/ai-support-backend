@@ -51,14 +51,16 @@ app.post('/ai-reply', async (req, res) => {
               "We're human-led and AI-augmented. This means you get the personal attention of skilled VAs, backed by the efficiency and innovation of smart tools."
         
             - "How can I book a consultation?" → 
-                "You can book a free consultation by clicking the link below:<br><br>
-                <a href=\"https://calendly.com/virtusyncsolutions-info/60min\">Book a Consultation</a><br><br>
-                Feel free to reach out if you have any further questions."
+               "You can book a free consultation by clicking the button below:<br><br>
+               <a href='https://calendly.com/virtusyncsolutions-info/60min' class='reply-button' target='_blank'>Book a Consultation</a>"
+
 
             - "How can I contact the VirtuSync Solutions team?" → 
-              "You can reach the VirtuSync Solutions team via:<br>
-              <a href=\"mailto:info@virtusyncsolutions.co.za\">info@virtusyncsolutions.co.za</a><br>
-              <span>WhatsApp: +27 76 640 8421</span>"
+             "<div class='reply-contact'>
+             <strong>Contact Us</strong><br>
+             📧 <a href='mailto:info@virtusyncsolutions.co.za' style='color: #3E206D;'>info@virtusyncsolutions.co.za</a><br>
+             📱 <span style='color: #014421;'>WhatsApp: +27 76 640 8421</span>
+            </div>"
 
             - "Do I need to sign a contract?" → 
               "Yes — for all services, we provide a clear service agreement to ensure transparency and alignment."
