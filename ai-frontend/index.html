@@ -117,7 +117,7 @@
     function appendMessage(message, className) {
   const msg = document.createElement("div");
   msg.className = `message ${className}`;
-  msg.innerHTML = message; // ✅ This allows links and styling to show properly
+  msg.innerHTML = message; // ✅ This will render the HTML correctly
   chatBox.appendChild(msg);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
